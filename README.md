@@ -10,15 +10,17 @@
 
 # 使用方式
 ```java
-AccessLimiter al = new AccessLimiter(jedisPool, "resource");
+//构造函数第二个参数：是根据需要控制的粒度起的一个名称，例如你想控制视频播放频次，那么这里传入"video"
+AccessLimiter al = new AccessLimiter(jedisPool, "video");
 ...
 
+//以下代码在需要进行频次控制的地方调用
 try {
-    al.inc('userIdentify');
+    //参数"userIdentify"可以是userId，username等能唯一标识用户的值
+    al.inc("userIdentify");
 } catch (AccessLimitException e) {
+    //如果超过设定的调用频次限制，则会抛出AccessLimitException异常
     AccessLimitStats stats = e.getStats();
     //todo 可以根据得到的相关控制信息，进行后续的业务逻辑处理
-} catch (LockTimeoutException e) {
-    e.printStackTrace();
-}
+} 
 ```
