@@ -65,7 +65,7 @@ public class AccessLimiter {
         assert jedisPool != null : "jedisPool not allowed null";
 
         try (Jedis jedis = jedisPool.getResource()) {
-            AccessLimitStats stats = getAccessLimitStats(jedis, userIdentify, true);
+            AccessLimitStats stats = getAccessLimitStats(jedis, userIdentify, true, false);
             if (stats.getLimitType() != LimitType.NOT_LIMIT) {
                 throw new AccessLimitException("limit at " + stats.getLimitStart(), stats);
             }
@@ -119,6 +119,25 @@ public class AccessLimiter {
         }
     }
 
+    public void clearLimit(String userIdentify) {
+        assert jedisPool != null : "jedisPool not allowed null";
+        try (Jedis jedis = jedisPool.getResource()) {
+            jedis.del(redisKeyWarningUser + userIdentify);
+            jedis.del(redisKeyForbiddenUser + userIdentify);
+            jedis.hdel(redisKeyWarningCounters, userIdentify);
+
+            new RedisRateCounter(jedis).resetCount(redisKeyRateCounter + userIdentify);
+        }
+    }
+
+    public AccessLimitStats getAccessLimitStats(String userIdentify) {
+        assert jedisPool != null : "jedisPool not allowed null";
+
+        try (Jedis jedis = jedisPool.getResource()) {
+            return getAccessLimitStats(jedis, userIdentify, false, true);
+        }
+    }
+
     /**
      * 优先判断是否已处于禁止/警告期间，只有未被限制访问的情况下，inc=true时当前访问次数才会记录
      *
@@ -127,12 +146,12 @@ public class AccessLimiter {
      * @param inc
      * @return
      */
-    private AccessLimitStats getAccessLimitStats(Jedis jedis, String userIdentify, boolean inc) {
+    private AccessLimitStats getAccessLimitStats(Jedis jedis, String userIdentify, boolean inc, boolean force) {
         AccessLimitStats stats = new AccessLimitStats();
         stats.setUserIdentify(userIdentify);
 
         handAccessLimit(jedis, stats);
-        if (stats.getLimitType() == LimitType.NOT_LIMIT) {
+        if (stats.getLimitType() == LimitType.NOT_LIMIT || force) {
             String warningsCount = jedis.hget(redisKeyWarningCounters, userIdentify);
             if (StringUtils.isNotEmpty(warningsCount)) {
                 stats.setWarningsCount(Integer.parseInt(warningsCount));
