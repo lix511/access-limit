@@ -1,3 +1,6 @@
+![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/xiangzhitech/access-limit.svg)
+![GitHub All Releases](https://img.shields.io/github/downloads/xiangzhitech/access-limit/total.svg)
+
 # Access Limit - 频次控制器
 本工具包可用于对资源访问频次的记录与控制，具有以下特性：
 - 资源控制粒度可自定义。
