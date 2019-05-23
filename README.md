@@ -11,16 +11,16 @@
 # 依赖
 - redis
 
-# 项目中maven引用
+# 项目中通过maven引用方式
 ```
 <dependency>
-  <groupId>com.xiangzhitech</groupId>
+  <groupId>io.github.lix511</groupId>
   <artifactId>access-limit</artifactId>
   <version>1.0</version>
 </dependency>
 ```
 
-# 使用方式
+# 代码使用说明
 ```java
 //构造函数第二个参数：是根据需要控制的粒度起的一个名称，例如你想控制视频播放频次，那么这里传入"video"
 AccessLimiter al = new AccessLimiter(jedisPool, "video");

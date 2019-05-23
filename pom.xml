@@ -10,7 +10,7 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.xiangzhitech</groupId>
+    <groupId>io.github.lix511</groupId>
     <artifactId>access-limit</artifactId>
     <version>1.0</version>
 
@@ -22,16 +22,16 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/xiangzhitech/access-limit</url>
-        <connection>https://github.com/xiangzhitech/access-limit.git</connection>
-        <developerConnection>http://www.xiangzhitech.com</developerConnection>
+        <url>https://github.com/lix511/access-limit</url>
+        <connection>https://github.com/lix511/access-limit.git</connection>
+        <developerConnection>http://www.itcamel.cn</developerConnection>
     </scm>
 
     <developers>
         <developer>
             <name>itcamel</name>
-            <email>xiangli@xiangzhitech.com</email>
-            <url>http://www.xiangzhitech.com</url>
+            <email>lix511@163.com</email>
+            <url>http://www.itcamel.cn</url>
         </developer>
     </developers>
 
