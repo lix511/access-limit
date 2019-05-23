@@ -2,6 +2,7 @@ package com.xiangzhi.accesslimit;
 
 /**
  * 请求超过频次限制异常
+ * @author itcamel
  */
 public class AccessLimitException extends Exception {
     private AccessLimitStats stats;

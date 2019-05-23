@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 频次计算
+ * @author itcamel
  */
 public class RedisRateCounter {
 
@@ -37,8 +38,10 @@ public class RedisRateCounter {
 
     /**
      * 传入key值进行验证
-     * @param key
-     * @return
+     * @param key 唯一标识
+     * @param timeUnit 时间单位
+     * @param inc 次数是否加1
+     * @return 次数
      */
     public int count(String key, TimeUnit timeUnit, boolean inc) {
         int rtv = 0;
@@ -74,10 +77,10 @@ public class RedisRateCounter {
 
     /**
      * redis查询数据，写入数据和判断是否超标
-     * @param jedis
-     * @param key
-     * @param timeUnit
-     * @return
+     * @param jedis jedis实例
+     * @param key 唯一标识
+     * @param timeUnit 时间单位
+     * @return 期间个数
      */
     private int periodCount(Jedis jedis, String key, TimeUnit timeUnit, boolean inc) {
         int period = toSeconds(timeUnit);
@@ -126,9 +129,9 @@ public class RedisRateCounter {
 
     /**
      * 获取当前键值对
-     * @param jedis
-     * @param key
-     * @return
+     * @param jedis jedis实例
+     * @param key 唯一标识
+     * @return keyName
      */
     private String getKeyName(Jedis jedis, String key, TimeUnit timeUnit) {
         String keyName = null;

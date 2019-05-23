@@ -6,6 +6,10 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPubSub;
 
+/**
+ * 废弃
+ * @author itcamel.
+ */
 public class AccessLimitRedisListener {
     private static final Logger logger = LoggerFactory.getLogger(AccessLimitRedisListener.class);
 

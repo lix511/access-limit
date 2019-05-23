@@ -2,6 +2,10 @@ package com.xiangzhi.accesslimit;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * 常量定义
+ * @author itcamel
+ */
 public class Consts {
     public static final String REDIS_KEY_FORBIDDEN_USER = "al:forbidden_user:";
     public static final String REDIS_KEY_WARNING_USER = "al:warning_user:";

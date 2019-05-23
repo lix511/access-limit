@@ -6,6 +6,7 @@ import redis.clients.jedis.Jedis;
 
 /**
  * 使用Redis实现的分布式锁
+ * @author itcamel
  */
 public class RedisLocker {
     private static final Logger logger = LoggerFactory.getLogger(RedisLocker.class);
@@ -21,7 +22,7 @@ public class RedisLocker {
      * 外部调用加锁的方法
      * @param lockKey 锁的名字
      * @param timeout 超时时间（放置时间长度(秒)，如：5L）
-     * @return
+     * @return 是否成功
      */
     public boolean tryLock(String lockKey, Long timeout) {
         try {
@@ -64,7 +65,7 @@ public class RedisLocker {
     /**
      * 内部获取锁的实现方法
      * @param lockKey 锁的名字
-     * @return
+     * @return 是否成功
      */
     private boolean innerTryLock(String lockKey) {
         //当前时间
@@ -91,7 +92,7 @@ public class RedisLocker {
      * 判断加锁是否超时
      * @param currentTime 当前时间
      * @param lockKey 锁的名字
-     * @return
+     * @return 是否超时
      */
     private boolean checkIfLockTimeout(Long currentTime, String lockKey) {
         //当前时间超过锁的持续时间

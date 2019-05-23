@@ -3,8 +3,9 @@ package com.xiangzhi.accesslimit;
 import java.util.Date;
 
 /**
- * 如果 limitType != LimitType.NOT_LIMIT && isNewLimit = false 表示是本次请求之前就已被禁止/警告，并且还仍在禁止/警告期间；
+ * 如果 limitType != LimitType.NOT_LIMIT and isNewLimit = false 表示是本次请求之前就已被禁止/警告，并且还仍在禁止/警告期间；
  * 并且在这种情况下，countPerMinute，countPerHour，countPerDay，warningsCount，limitReason也都不会计算，直接返回null。
+ * @author itcamel
  */
 public class AccessLimitStats implements Comparable<AccessLimitStats> {
     private String userIdentify;

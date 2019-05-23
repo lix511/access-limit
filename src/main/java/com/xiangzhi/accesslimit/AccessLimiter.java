@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * 可以根据每分钟，每小时，每天的访问量对请求进行判断是否合法。
  * 采用redis存储，支持分布式环境部署。
  *
- * @author itcamel.
+ * @author itcamel
  */
 public class AccessLimiter {
     /**
